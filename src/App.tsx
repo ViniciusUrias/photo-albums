@@ -7,6 +7,8 @@ function App() {
 
 	return (
 		<ThemeProvider defaultTheme="dark" storageKey="@user-theme-pref">
+			<div id="live-region" aria-live="polite" className="sr-only"></div>
+
 			<QueryClientProvider client={queryClient}>
 				<Router />
 			</QueryClientProvider>
