@@ -26,7 +26,10 @@ export default function PhotoGrid({ photos, onDelete, expand = true }: AlbumList
 	return (
 		<ScrollArea className="w-full h-[80vh]  p-2 rounded-md border">
 			<PhotoModal onClose={() => setIsModalOpen(false)} open={isModalOpen} photo={selectedPhoto} />
-			<div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 grid-flow-row-dense gap-2 p-4">
+			<div
+				data-testid="photos-gallery-grid"
+				className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 grid-flow-row-dense gap-2 p-4"
+			>
 				{photos?.map((photo, index) => {
 					const idx = String(index);
 					const colSpan = idx.includes(String(randomSpan)) ? "col-span-2 row-span-2 " : "col-span-1 row-span-1";

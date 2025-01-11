@@ -36,7 +36,7 @@ export default function DrawerEditAlbum({ open, onClose, album }) {
 		console.log(values);
 		const objectUrl = URL.createObjectURL(values.picture);
 		await addPhotoMutation.mutateAsync(
-			{ title: values.title, albumId: album?.id, url: objectUrl },
+			{ title: values.photoTitle, albumId: album?.id, url: objectUrl },
 			{
 				onSuccess(data) {
 					setDialogOpen(false);
@@ -61,7 +61,7 @@ export default function DrawerEditAlbum({ open, onClose, album }) {
 			open={open}
 			onOpenChange={onClose}
 		>
-			<DrawerContent id="album-photo" data-testid="#photos-drawer">
+			<DrawerContent data-testid="drawer-edit-album">
 				<DrawerHeader>
 					<DrawerTitle className="flex justify-between items-center">
 						<span className="italic text-2xl">{album?.title} </span>
@@ -73,8 +73,8 @@ export default function DrawerEditAlbum({ open, onClose, album }) {
 					</DrawerTitle>
 					<DrawerDescription className="mt-6">
 						<Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-							<DialogTrigger>
-								<Button>
+							<DialogTrigger asChild>
+								<Button name="Upload new photo" aria-label="Upload new photo">
 									<CloudUpload /> Upload new photo
 								</Button>
 							</DialogTrigger>

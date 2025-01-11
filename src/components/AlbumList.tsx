@@ -47,11 +47,12 @@ export default function AlbumList({ albums, userId, onDelete, onEdit }: AlbumLis
 						>
 							<Card className={cn(`transition-transform`, album.isRemoving ? "animate-fadeOut" : "animate-fadeIn")}>
 								<CardHeader className="flex flex-row items-center justify-between ">
-									<CardTitle>{album.title}</CardTitle>
+									<CardTitle aria-label={`Album title: ${album.title}`}>{album.title}</CardTitle>
 									{onDelete || onEdit ? (
 										<div className="flex items-center gap-2">
 											{onDelete && (
 												<Button
+													role="button"
 													id={`exclude-album-${album.title}-button`}
 													aria-label={`Exclude album: ${album.title}`}
 													onClick={async (e) => {
@@ -74,6 +75,7 @@ export default function AlbumList({ albums, userId, onDelete, onEdit }: AlbumLis
 
 											{onEdit && (
 												<Button
+													role="button"
 													id={`edit-album-${album.title}-button`}
 													aria-label={`Edit album: ${album.title}`}
 													onClick={(e) => {

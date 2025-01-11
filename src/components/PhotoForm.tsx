@@ -9,8 +9,8 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 
 export const photoFormSchema = z.object({
-	title: z.string().min(2, {
-		message: "Album title must be at least 4 characters.",
+	photoTitle: z.string().min(2, {
+		message: "Photo title must be at least 4 characters.",
 	}),
 	picture: z.any(),
 });
@@ -24,15 +24,15 @@ export default function PhotoForm({
 }) {
 	const form = useForm<z.infer<typeof photoFormSchema>>({
 		resolver: zodResolver(photoFormSchema),
-		defaultValues: { title: "", picture: null },
+		defaultValues: { photoTitle: "", picture: null },
 	});
 
 	return (
 		<Form {...form}>
-			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+			<form data-testid="upload-photo-form" onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
 				<FormField
 					control={form.control}
-					name="title"
+					name="photoTitle"
 					render={({ field }) => (
 						<FormItem>
 							<FormLabel>Title</FormLabel>
@@ -54,12 +54,13 @@ export default function PhotoForm({
 					id="input-file-picture"
 					aria-labelledby="input-file-picture-label"
 					aria-label="Select a picture"
+					data-testid="photo-uploader"
 					accept="image/png, image/jpeg"
 					type="file"
 					onChange={(f) => form.setValue("picture", f.target.files?.[0])}
 				/>
 				<span className="text-red-500">{form.formState.errors.picture?.message?.toString()}</span>
-				<Button aria-label="Create a new album " disabled={isSubmitting} type="submit">
+				<Button role="button" aria-label="Create a new album " disabled={isSubmitting} type="submit">
 					{isSubmitting ? <Loader2 className="animate-spin" /> : "Done"}
 				</Button>
 			</form>
