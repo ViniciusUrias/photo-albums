@@ -4,6 +4,23 @@ export default {
 	content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
 	theme: {
 		extend: {
+			keyframes: {
+				fadeOut: {
+					from: { opacity: 1, transform: "scale(1)" },
+					to: { opacity: 0, transform: "scale(0.9)" },
+				},
+				fadeIn: {
+					from: { opacity: 0, transform: "scale(0.9)" },
+					to: {
+						opacity: 1,
+						transform: "scale(1)",
+					},
+				},
+			},
+			animation: {
+				fadeOut: "fadeOut 0.3s ease-in-out",
+				fadeIn: "fadeIn 0.3s ease-in-out",
+			},
 			borderRadius: {
 				lg: "var(--radius)",
 				md: "calc(var(--radius) - 2px)",
