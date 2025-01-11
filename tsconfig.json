@@ -9,6 +9,9 @@
     }
   ],
   "compilerOptions": {
+    "types": [
+      "@vitest/browser/providers/playwright"
+    ],
     "baseUrl": ".",
     "paths": {
       "@/*": [

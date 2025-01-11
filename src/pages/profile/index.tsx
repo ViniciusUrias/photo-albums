@@ -13,9 +13,9 @@ import { Plus } from "lucide-react";
 import React from "react";
 import { z } from "zod";
 
-export default function Profile() {
+export default function Profile({ userId }) {
 	const user = useSelector((s) => s.user!);
-	const { id } = user;
+	const id = userId ?? user?.id;
 	const [dialogOpen, setDialogOpen] = React.useState(false);
 	const [isEditing, setIsEditing] = React.useState(false);
 	const [selectedAlbum, setSelectedAlbum] = React.useState<Album | null>(null);
@@ -34,6 +34,13 @@ export default function Profile() {
 			{ title: values.title },
 			{
 				onSuccess(data) {
+					if (!document.startViewTransition) {
+						setDialogOpen(false);
+						queryClient.setQueryData(["albums", id], (oldData: Albums) => {
+							return [data, ...oldData];
+						});
+						return;
+					}
 					document.startViewTransition(() => {
 						setDialogOpen(false);
 						queryClient.setQueryData(["albums", id], (oldData: Albums) => {
@@ -60,7 +67,7 @@ export default function Profile() {
 
 	return (
 		<>
-			<Tabs defaultValue="albums">
+			<Tabs data-testid="profile-tabs" defaultValue="albums">
 				<TabsList>
 					<TabsTrigger value="albums">Albums</TabsTrigger>
 					<TabsTrigger value="account">Account</TabsTrigger>
@@ -71,7 +78,7 @@ export default function Profile() {
 						<AccountForm />
 					</div>
 				</TabsContent>
-				<TabsContent value="albums">
+				<TabsContent id="tab-albums" value="albums">
 					<>
 						<div className="flex items-center py-4 justify-between">
 							<h2 className="text-lg ">Manage your albums</h2>
@@ -81,7 +88,7 @@ export default function Profile() {
 										<Plus /> New
 									</Button>
 								</DialogTrigger>
-								<DialogContent>
+								<DialogContent data-testid="dialog-add-album">
 									<DialogTitle>Create new album</DialogTitle>
 									<AlbumForm onSubmit={onSubmit} isSubmitting={addAlbum.isPending} />
 								</DialogContent>

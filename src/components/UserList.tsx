@@ -3,11 +3,18 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Users } from "@/types/user";
 import { AvatarFallback, AvatarImage } from "@radix-ui/react-avatar";
-import { Link } from "react-router";
+import { NavLink } from "react-router";
 
 export default function UserList({ users }: { users: Users }) {
+	if (!users.length) {
+		return (
+			<strong aria-label="No users" className="warning">
+				There are no users to list
+			</strong>
+		);
+	}
 	return (
-		<section className="masonry-grid ">
+		<section data-testid="user-list" className="masonry-grid ">
 			{users?.map((user) => {
 				const nameFallback = user?.name
 					?.split(" ")
@@ -37,9 +44,14 @@ export default function UserList({ users }: { users: Users }) {
 						</CardContent>
 						<CardFooter className="justify-end">
 							<Button asChild>
-								<Link viewTransition key={user.id} to={`/users/${user.id}/albums`}>
+								<NavLink
+									aria-label={`View albums for user ${user.name}`}
+									viewTransition
+									key={user.id}
+									to={`/users/${user.id}/albums`}
+								>
 									View albums
-								</Link>
+								</NavLink>
 							</Button>
 						</CardFooter>
 					</Card>
