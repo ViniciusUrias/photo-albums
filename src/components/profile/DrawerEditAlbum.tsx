@@ -11,7 +11,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Drawer, DrawerContent, DrawerDescription, DrawerHeader, DrawerTitle } from "../ui/drawer";
 
 export default function DrawerEditAlbum({ open, onClose, album }) {
-	const snapPoints = [1];
+	const snapPoints = [0.9];
 	const [snap, setSnap] = React.useState<number | string | null>(snapPoints[0]);
 	const [dialogOpen, setDialogOpen] = React.useState(false);
 	const { addPhotoMutation, deletePhotoMutation, photos } = usePhotos(album?.id);
@@ -54,7 +54,7 @@ export default function DrawerEditAlbum({ open, onClose, album }) {
 			open={open}
 			onOpenChange={onClose}
 		>
-			<DrawerContent data-testid="drawer-edit-album">
+			<DrawerContent className="p-4" data-testid="drawer-edit-album">
 				<DrawerHeader>
 					<DrawerTitle className="flex justify-between items-center">
 						<span className="italic text-2xl">{album?.title} </span>
