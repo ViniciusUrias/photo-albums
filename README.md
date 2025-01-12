@@ -9,6 +9,17 @@ This project is a web application for managing albums and photos, built with **R
 - **Profile Page**: Manage albums, photos and account data for the currently logged-in user.
 - **Album List Page**: View albums and navigate to individual photo lists for each album.
 
+## Stack
+
+- **@tanstack/react-query**: Data fetching.
+- **tailwind**: Utility-first CSS framework.
+- **shadcn-ui**: UI Components.
+- **vitest**: Testing framework for Vite projects.
+- **@testing-library/react**: Testing components and interactions.
+- **react-hook-form**: Handler for forms.
+- **react-router**: Routing library for React applications.
+- **zustand**: Lightweight state management library for React.
+
 ## Getting Started
 
 ### Prerequisites
