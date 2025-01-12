@@ -19,9 +19,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
-    "types": [
-      "@vitest/browser/providers/playwright"
-    ],
   },
   "include": [
     "vite.config.ts",
