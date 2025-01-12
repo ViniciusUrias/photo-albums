@@ -14,10 +14,11 @@ interface AlbumListProps {
 	userId: number;
 	onDelete?: (id: number) => void;
 	expand?: boolean;
+	backButton?: boolean;
 }
 
 const randomSpan = Math.floor(Math.random() * 10);
-export default function PhotoGrid({ photos, onDelete, expand = true }: AlbumListProps) {
+export default function PhotoGrid({ photos, onDelete, expand = true, backButton = true }: AlbumListProps) {
 	const [isModalOpen, setIsModalOpen] = React.useState(false);
 	const [selectedPhoto, setSelectedPhoto] = React.useState<Photo | null>(null);
 	const handleExpandPhoto = (photo: Photo) => {
@@ -26,12 +27,21 @@ export default function PhotoGrid({ photos, onDelete, expand = true }: AlbumList
 	};
 	return (
 		<>
-			<div className="my-2">
-				<NavigateBack />
-			</div>
+			{backButton ? (
+				<div className="my-2">
+					<NavigateBack />
+				</div>
+			) : null}
 
 			<ScrollArea className="w-full h-[80vh]  p-2 rounded-md border">
-				<PhotoModal onClose={() => setIsModalOpen(false)} open={isModalOpen} photo={selectedPhoto} />
+				<PhotoModal
+					onClose={() => {
+						setIsModalOpen(false);
+						setSelectedPhoto(null);
+					}}
+					open={isModalOpen}
+					photo={selectedPhoto}
+				/>
 				<div
 					data-testid="photos-gallery-grid"
 					className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 grid-flow-row-dense gap-2 p-4"

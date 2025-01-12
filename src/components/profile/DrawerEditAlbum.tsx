@@ -82,7 +82,7 @@ export default function DrawerEditAlbum({ open, onClose, album }) {
 					</DrawerDescription>
 				</DrawerHeader>
 				<div>
-					<PhotoGrid expand={false} onDelete={onDeletePhoto} photos={photos} userId={user?.id} />
+					<PhotoGrid backButton={false} expand={false} onDelete={onDeletePhoto} photos={photos} userId={user?.id} />
 				</div>
 			</DrawerContent>
 		</Drawer>
