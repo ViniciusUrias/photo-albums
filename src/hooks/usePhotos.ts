@@ -1,4 +1,3 @@
-// hooks/useAlbums.ts
 import { createPhoto, deletePhoto, getPhotos } from "@/api/services/photos";
 import { useMutation, useQuery } from "@tanstack/react-query";
 

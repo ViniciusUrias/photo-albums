@@ -5,7 +5,6 @@ import { render, screen } from "@testing-library/react";
 import { createRoutesStub } from "react-router";
 
 test("Renders users cards in the user list", async () => {
-	// Mock user data
 	const mockUsers: Users = [
 		{
 			id: 1,
@@ -61,10 +60,8 @@ test("Renders users cards in the user list", async () => {
 		},
 	]);
 
-	// Render the component with mock data
 	render(<Stub initialEntries={["/users"]} />);
 
-	// Verify users are rendered
 	const user1 = await screen.findByText(/Leanne Graham/i);
 	const user2 = await screen.findByText(/Patricia Lebsack/i);
 	const list = screen.getByTestId("user-list");
@@ -74,8 +71,6 @@ test("Renders users cards in the user list", async () => {
 	expect(user2).toBeInTheDocument();
 });
 test("Renders message when user is empty", async () => {
-	// Mock user data
-
 	const Stub = createRoutesStub([
 		{
 			path: "/users",
@@ -83,10 +78,8 @@ test("Renders message when user is empty", async () => {
 		},
 	]);
 
-	// Render the component with mock data
 	render(<Stub initialEntries={["/users"]} />);
 
-	// Verify users are rendered
 	const message = screen.getByRole("strong");
 	expect(message).toBeInTheDocument();
 });
@@ -146,10 +139,8 @@ test("User action when click in button", async () => {
 		},
 	]);
 
-	// Render the component with mock data
 	render(<Stub initialEntries={["/users"]} />);
 
-	// Verify users are rendered
 	const user1 = await screen.findByText(/Leanne Graham/i);
 	const user2 = await screen.findByText(/Patricia Lebsack/i);
 	const list = screen.getByTestId("user-list");

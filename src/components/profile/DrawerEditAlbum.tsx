@@ -18,8 +18,6 @@ export default function DrawerEditAlbum({ open, onClose, album }) {
 	const user = useSelector((s) => s.user);
 	const queryClient = useQueryClient();
 	async function onDeletePhoto(photo: Photo) {
-		// Do something with the form values.
-		// ✅ This will be type-safe and validated.
 		await deletePhotoMutation.mutateAsync(
 			{ photoId: photo.id },
 			{
@@ -44,11 +42,6 @@ export default function DrawerEditAlbum({ open, onClose, album }) {
 						return [data, ...oldData];
 					});
 				},
-				// onError() {
-				// 	formPhoto.setError("picture", {
-				// 		message: "Something went wrong while uploading the photo, please try again later",
-				// 	});
-				// },
 			}
 		);
 	}
