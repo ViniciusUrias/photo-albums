@@ -13,7 +13,7 @@ import { Plus } from "lucide-react";
 import React from "react";
 import { z } from "zod";
 
-export default function Profile({ userId }) {
+export default function Profile({ userId }: { userId?: number }) {
 	const user = useSelector((s) => s.user!);
 	const id = userId ?? user?.id;
 	const [dialogOpen, setDialogOpen] = React.useState(false);

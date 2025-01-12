@@ -2,6 +2,7 @@ import AuthLayout from "@/layouts/auth";
 import MainLayout from "@/layouts/main";
 import Albums from "@/pages/albums";
 import LoginPage from "@/pages/auth/login";
+import NotFound from "@/pages/errors/NotFound";
 import HomePage from "@/pages/home";
 import Photos from "@/pages/photos";
 import Profile from "@/pages/profile";
@@ -10,11 +11,14 @@ const router = createBrowserRouter([
 	{
 		path: "/auth",
 		element: <AuthLayout />,
+		ErrorBoundary: NotFound,
 		children: [{ path: "sign-in", element: <LoginPage /> }],
 	},
 	{
 		path: "/",
 		element: <MainLayout />,
+		ErrorBoundary: NotFound,
+
 		children: [
 			{
 				path: "users",
@@ -34,22 +38,5 @@ const router = createBrowserRouter([
 	},
 ]);
 export default function Router() {
-	return (
-		<RouterProvider router={router} />
-		// <Routes>
-		// 	{/* <Route element={<AuthLayout />}>
-		// 		<Route path="login" element={<Login />} />
-		// 		<Route path="register" element={<Register />} />
-		// 	</Route> */}
-
-		// 	<Route element={<MainLayout />}>
-		// 		<Route path="/users">
-		// 			<Route index element={<HomePage />} />
-		// 			<Route path="/users/:userId/albums" element={<Albums />}>
-		// 				<Route path=":albumId/photos" element={<Photos />} />
-		// 			</Route>
-		// 		</Route>
-		// 	</Route>
-		// </Routes>
-	);
+	return <RouterProvider router={router} />;
 }

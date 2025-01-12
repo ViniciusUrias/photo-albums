@@ -4,6 +4,7 @@ import { StateCreator } from "zustand";
 export interface AuthState {
 	user: User | null;
 	signIn: ({ username, password }: { username: string; password: string }) => void;
+	signOut: () => void;
 }
 
 export const createAuthStore: StateCreator<AuthState> = (set) => ({
@@ -34,4 +35,5 @@ export const createAuthStore: StateCreator<AuthState> = (set) => ({
 				},
 			},
 		})),
+	signOut: () => set({ user: null }),
 });

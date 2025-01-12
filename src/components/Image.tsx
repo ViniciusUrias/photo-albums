@@ -1,6 +1,6 @@
+import fallbackImage from "@/assets/no-image-available.png";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
-import fallbackImage from "/public/no-image-available.png";
 export default function Image({ src, className, ...rest }: React.HTMLProps<HTMLImageElement>) {
 	const [error, setError] = useState(false);
 	return (

@@ -1,7 +1,12 @@
 import Header from "@/components/Header";
-import { Outlet } from "react-router";
+import { useSelector } from "@/store";
+import { Navigate, Outlet } from "react-router";
 
 export default function MainLayout() {
+	const user = useSelector((s) => s.user);
+	if (!user) {
+		return <Navigate to="/auth/sign-in" replace />;
+	}
 	return (
 		<div className="bg-primary-foreground h-screen w-screen">
 			<Header />
